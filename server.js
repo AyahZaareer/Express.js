@@ -1,15 +1,39 @@
 const express = require('express')
 const cors = require('cors')
-const data = require('./asesst/data/weather.json')
+const weather = require('./asesst/data/weather.json')
 const { json } = require('express')
 require('dotenv').config()
 
 
-let PORT = process.env.PORT
+let PORT = process.env.PORT || 3090
 
 const app = express()
 app.use(cors())
 app.get('/', function (req, res) {
   res.send(data)
 })
+
+// app.get('/weather', function (req, res) {
+//   const arrOfData = weather.data.map(data => new Weather(data));
+//   res.send(arrOfData);
+// })
+// class Weather {
+//   constructor(data) {
+//     this.date = data.valid_date;
+//     this.description = data.weather.description;
+//   }
+// }
+
+app.get('/weather', function (req, res) {
+  const arrOfData = weather.data.map(data => new Weather(data));
+  res.send(arrOfData);
+})
+class Weather {
+  constructor(data) {
+    this.date = data.valid_date;
+    this.description = data.weather.description;
+  }
+}
+
+
 app.listen(PORT)
