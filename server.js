@@ -37,28 +37,7 @@ class Weather {
   }
 }
 
-// let MOVIE_KEY = process.env.MOVIE_KEY;
 
-// app.get('/movie', (req, res) => {
-
-//   const movieUrl = `https://api.themoviedb.org/3/movie/550?api_key=${MOVIE_KEY}`;
-//   superagent.get(movieUrl).then(movieData => {
-//     const newArrOfData = movieData.body.dataOfM.map(dataOfM => new Movie(dataOfM))
-//     res.send(newArrOfData);
-//   });
-
-
-
-
-// });
-
-// class Movie {
-//   constructor(dataOfM) {
-//     this.title = dataOfM.original_title;
-//     this.img = dataOfM.poster_path;
-//     this.description = dataOfM.overview;
-//   }
-// }
 
 
 app.listen(PORT)
