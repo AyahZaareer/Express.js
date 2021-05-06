@@ -38,6 +38,4 @@ class Weather {
 }
 
 
-
-
 app.listen(PORT)
