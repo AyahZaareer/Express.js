@@ -2,6 +2,13 @@ const superagent = require('superagent');
 require('dotenv').config();
 
 let MOVIE_KEY = process.env.MOVIE_KEY;
+class Movie {
+    constructor(movies) {
+        this.title = movies.original_title;
+        this.img = movies.poster_path;
+        this.description = movies.overview;
+    }
+}
 
 const handelMovie = (req, res) => {
     try {
@@ -17,12 +24,6 @@ const handelMovie = (req, res) => {
 
 }
 
-class Movie {
-    constructor(movies) {
-        this.title = movies.original_title;
-        // this.img = movies.poster_path;
-        this.description = movies.overview;
-    }
-}
+
 
 module.exports = handelMovie;
