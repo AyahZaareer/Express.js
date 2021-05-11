@@ -18,7 +18,7 @@ const handelMovie = (req, res) => {
 
         superagent.get(movieUrl).then(movieData => {
             const newArrOfData = movieData.body.results.map(dataOfM => new Movie(dataOfM));
-            inMoemory[query] = newArrOfData;
+
             res.send(newArrOfData);
         });
     } catch (erorr) {
