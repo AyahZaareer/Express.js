@@ -11,16 +11,35 @@ class Movie {
     }
 }
 
+const inMemory = {};
+
+
 const handelMovie = (req, res) => {
+
     try {
-        const movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_KEY}&query=${req.query.query}&limit=10`;
+        const movieUrl = `https://api.themoviedb.org/3/search/movie`;
+        let key = req.query.query;
+        const queryParams = {
+            api_key: MOVIE_KEY,
+            query: req.query.query
+
+        };
+        if (inMemory[key]) {
+            console.log('from memory');
+            res.send(inMemory[req.query.query]);
+        } else {
+            superagent.get(movieUrl).query(queryParams).then(movieData => {
+                const newArrOfData = movieData.body.results.map(dataOfM => new Movie(dataOfM));
+                inMemory[key] = newArrOfData;
+                res.send(newArrOfData);
+                console.log('movie from  API');
+            })
+
+        }
+
         // console.log(req.query);
 
-        superagent.get(movieUrl).then(movieData => {
-            const newArrOfData = movieData.body.results.map(dataOfM => new Movie(dataOfM));
 
-            res.send(newArrOfData);
-        });
     } catch (erorr) {
         console.log(error);
     }
